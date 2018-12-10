@@ -23,10 +23,11 @@
             android:layout_height="wrap_content"
             android:textSize="40dp"
             local:MvxItemTemplate="@layout/item_radio"
-            local:MvxBind="ItemsSource Items;SelectedItem SelectedItem" />
+            local:MvxBind="ItemsSource CoinList;SelectedItem SelectedCoin" />
         <Button
             local:MvxBind="Click AddCoinToJarCommand ;Text AddToJarString"
             android:layout_width="match_parent"
+            android:enabled="true"
             android:backgroundTint="@color/lightPrimary"
             android:layout_height="@dimen/button_height"
             android:id="@+id/add_to_coin_button" />
