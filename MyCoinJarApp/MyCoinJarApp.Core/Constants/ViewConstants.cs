@@ -28,6 +28,7 @@ namespace MyCoinJarApp.Core.Constants
         public static readonly string ZeroDollarString = "$0.00";
         public static readonly string AddCoinString = "Add Coin";
         public static readonly string ResetJarString = "Empty me please...";
+        public static readonly string CoinJarTitle = "My Coin Jar";
         public static readonly string CoinJarAmountDescriptionString = "This jar has this much money in it...";
 
         public static List<Coin> AllowedCoins = new List<Coin>()

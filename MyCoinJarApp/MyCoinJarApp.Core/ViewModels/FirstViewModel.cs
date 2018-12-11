@@ -93,12 +93,12 @@ namespace MyCoinJarApp.Core.ViewModels
         public string ResetJarString => ViewConstants.ResetJarString;
         public string CoinJarAmountDescriptionString => ViewConstants.CoinJarAmountDescriptionString;
 
-        private List<Coin> _coinList = new List<Coin>()
+        private MvxObservableCollection<Coin> _coinList = new MvxObservableCollection<Coin>()
             {
                 new Coin("Dollar",ViewConstants.DollarAmount,ViewConstants.DollarWeight)
             };
 
-        public List<Coin> CoinList
+        public MvxObservableCollection<Coin> CoinList
         {
             get { return _coinList; }
             set { _coinList = value; RaisePropertyChanged(() => CoinList); }

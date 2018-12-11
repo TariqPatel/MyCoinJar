@@ -14,5 +14,10 @@ namespace MyCoinJarApp.Core.Models
             Weight = weight;
             Name = name;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
