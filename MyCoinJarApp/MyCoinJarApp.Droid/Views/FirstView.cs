@@ -3,7 +3,7 @@ using Android.OS;
 
 namespace MyCoinJarApp.Droid.Views
 {
-    [Activity(Label = "View for FirstViewModel")]
+    [Activity(Label = "My Coin Jar")]
     public class FirstView : BaseView
     {
         protected override int LayoutResource => Resource.Layout.FirstView;

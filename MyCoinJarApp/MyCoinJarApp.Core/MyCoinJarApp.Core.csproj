@@ -17,5 +17,9 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Constants\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Utils\Utilities.cs" />
   </ItemGroup>
 </Project>

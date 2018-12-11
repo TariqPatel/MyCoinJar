@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MyCoinJarApp.Core
+namespace MyCoinJarApp.Core.Interfaces
 {
     public interface ICoin
     {

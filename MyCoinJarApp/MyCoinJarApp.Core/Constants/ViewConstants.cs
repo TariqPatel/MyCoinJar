@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using MyCoinJarApp.Core.Models;
+
 namespace MyCoinJarApp.Core.Constants
 {
     public class ViewConstants
@@ -13,11 +16,27 @@ namespace MyCoinJarApp.Core.Constants
         public static readonly decimal HalfDollarWeight = 11.340m;
         public static readonly decimal DollarWeight = 3m; //random amount
 
-        public static readonly decimal PennyAmount = 1m;
-        public static readonly decimal NickelAmount = 5m;
-        public static readonly decimal DimeAmount = 10m;
-        public static readonly decimal QuarterAmount = 25m;
-        public static readonly decimal HalfDollarAmount = 50m;
-        public static readonly decimal DollarAmount = 100m;
+        public static readonly decimal PennyAmount = 0.1m;
+        public static readonly decimal NickelAmount = 0.5m;
+        public static readonly decimal DimeAmount = 0.10m;
+        public static readonly decimal QuarterAmount = 0.25m;
+        public static readonly decimal HalfDollarAmount = 0.50m;
+        public static readonly decimal DollarAmount = 1m;
+
+        public static readonly string CoinWeightExceededErrorMessage = "Coin weight exceeded.";
+        public static readonly string InvalidCoinErrorMessage = "Coin not allowed.";
+        public static readonly string ZeroDollarString = "$0.00";
+        public static readonly string AddCoinString = "Add Coin";
+        public static readonly string ResetJarString = "Empty me please...";
+        public static readonly string CoinJarAmountDescriptionString = "This jar has this much money in it...";
+
+        public static List<Coin> AllowedCoins = new List<Coin>()
+            {
+                new Coin("Penny",ViewConstants.PennyAmount,ViewConstants.PennyWeight),
+                new Coin("Nickel",ViewConstants.NickelAmount,ViewConstants.NickelWeight),
+                new Coin("Dime",ViewConstants.DimeAmount,ViewConstants.DimeWeight),
+                new Coin("Quarter",ViewConstants.QuarterAmount,ViewConstants.QuarterWeight),
+                new Coin("Half Dollar",ViewConstants.HalfDollarAmount,ViewConstants.HalfDollarWeight)
+            };
     }
 }

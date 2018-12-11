@@ -1,4 +1,6 @@
 ﻿using System;
+using MyCoinJarApp.Core.Interfaces;
+
 namespace MyCoinJarApp.Core.Models
 {
     public class Coin : ICoin

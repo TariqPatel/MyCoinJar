@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MyCoinJarApp.Core.Constants;
 using MyCoinJarApp.Core.Models;
@@ -10,45 +11,75 @@ namespace MyCoinJarApp.Core.ViewModels
         : MvxViewModel
     {
         public MvxCommand AddCoinToJarCommand { get; set; }
+        public MvxCommand ResetCoinJarCommand { get; set; }
 
         public FirstViewModel()
         {
             AddCoinToJarCommand = new MvxCommand(DoAddCoinToJar);
-            _coinList.AddRange(AllowedCoins);
+            ResetCoinJarCommand = new MvxCommand(DoResetCoinJar);
+            _coinList.AddRange(ViewConstants.AllowedCoins);
+        }
+
+        public void InitVariables()
+        {
+            _coinJarAmountString = ViewConstants.ZeroDollarString;
+            _coinJarErrorString = string.Empty;
+            _coinJarAmount = 0.00m;
+            _coinJarWeight = 0.00m;
+        }
+
+        void DoResetCoinJar()
+        {
+            CoinJarAmount = 0.00m;
+            CoinJarWeight = 0.00m;
         }
 
         void DoAddCoinToJar()
         {
             if (CoinJarWeight > ViewConstants.CoinJarMaxAmountInGrams)
             {
-                Console.WriteLine("Coin weight exceeded.");
+                CoinJarErrorString = ViewConstants.CoinWeightExceededErrorMessage;
+                return;
             }
 
-            if (AllowedCoins.Contains(SelectedCoin))
+            var match = ViewConstants.AllowedCoins.FirstOrDefault(name => name.Name.Equals(SelectedCoin.Name));
+
+            if (match != null)
             {
                 CoinJarAmount += SelectedCoin.Amount;
                 CoinJarWeight += SelectedCoin.Weight;
+                CoinJarErrorString = string.Empty;
             }
             else
             {
-                Console.WriteLine("Coin not allowed");
+                CoinJarErrorString = ViewConstants.InvalidCoinErrorMessage;
             }
         }
 
-        private List<Coin> AllowedCoins = new List<Coin>()
-            {
-                new Coin("Penny",ViewConstants.PennyAmount,ViewConstants.PennyWeight),
-                new Coin("Nickel",ViewConstants.NickelAmount,ViewConstants.NickelWeight),
-                new Coin("Dime",ViewConstants.DimeAmount,ViewConstants.DimeWeight),
-                new Coin("Quarter",ViewConstants.QuarterAmount,ViewConstants.QuarterWeight),
-                new Coin("Half Dollar",ViewConstants.HalfDollarAmount,ViewConstants.HalfDollarWeight)
-            };
+        private string _coinJarAmountString = ViewConstants.ZeroDollarString;
+        public string CoinJarAmountString
+        {
+            get { return _coinJarAmountString; }
+            set { _coinJarAmountString = value; RaisePropertyChanged(() => CoinJarAmountString); }
+        }
+
+        private string _coinJarErrorString;
+        public string CoinJarErrorString
+        {
+            get { return _coinJarErrorString; }
+            set { _coinJarErrorString = value; RaisePropertyChanged(() => CoinJarErrorString); }
+        }
 
         private decimal _coinJarAmount;
         public decimal CoinJarAmount
         {
             get { return _coinJarAmount; }
-            set { _coinJarAmount = value; RaisePropertyChanged(() => CoinJarAmount); }
+            set
+            {
+                _coinJarAmount = value;
+                RaisePropertyChanged(() => CoinJarAmount);
+                CoinJarAmountString = "$" + CoinJarAmount.ToString();
+            }
         }
 
         private decimal _coinJarWeight;
@@ -58,19 +89,22 @@ namespace MyCoinJarApp.Core.ViewModels
             set { _coinJarWeight = value; RaisePropertyChanged(() => CoinJarWeight); }
         }
 
-        public string AddToJarString => "Add Coin";
+        public string AddToJarString => ViewConstants.AddCoinString;
+        public string ResetJarString => ViewConstants.ResetJarString;
+        public string CoinJarAmountDescriptionString => ViewConstants.CoinJarAmountDescriptionString;
 
         private List<Coin> _coinList = new List<Coin>()
             {
                 new Coin("Dollar",ViewConstants.DollarAmount,ViewConstants.DollarWeight)
             };
+
         public List<Coin> CoinList
         {
             get { return _coinList; }
             set { _coinList = value; RaisePropertyChanged(() => CoinList); }
         }
 
-        private Coin _selectedCoin = new Coin("Penny", ViewConstants.PennyAmount,ViewConstants.PennyWeight);
+        private Coin _selectedCoin = new Coin("Penny", ViewConstants.PennyAmount, ViewConstants.PennyWeight);
         public Coin SelectedCoin
         {
             get { return _selectedCoin; }
