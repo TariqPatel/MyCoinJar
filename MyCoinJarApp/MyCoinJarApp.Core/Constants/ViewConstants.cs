@@ -32,11 +32,11 @@ namespace MyCoinJarApp.Core.Constants
 
         public static List<Coin> AllowedCoins = new List<Coin>()
             {
-                new Coin("Penny",ViewConstants.PennyAmount,ViewConstants.PennyWeight),
-                new Coin("Nickel",ViewConstants.NickelAmount,ViewConstants.NickelWeight),
-                new Coin("Dime",ViewConstants.DimeAmount,ViewConstants.DimeWeight),
-                new Coin("Quarter",ViewConstants.QuarterAmount,ViewConstants.QuarterWeight),
-                new Coin("Half Dollar",ViewConstants.HalfDollarAmount,ViewConstants.HalfDollarWeight)
+                new Coin("Penny",PennyAmount,PennyWeight),
+                new Coin("Nickel",NickelAmount,NickelWeight),
+                new Coin("Dime",DimeAmount,DimeWeight),
+                new Coin("Quarter",QuarterAmount,QuarterWeight),
+                new Coin("Half Dollar",HalfDollarAmount,HalfDollarWeight)
             };
     }
 }
